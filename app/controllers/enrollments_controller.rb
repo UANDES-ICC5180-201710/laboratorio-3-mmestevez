@@ -1,28 +1,20 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
 
-  # GET /enrollments
-  # GET /enrollments.json
   def index
     @enrollments = Enrollment.all
   end
 
-  # GET /enrollments/1
-  # GET /enrollments/1.json
   def show
   end
 
-  # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
   end
 
-  # GET /enrollments/1/edit
   def edit
   end
 
-  # POST /enrollments
-  # POST /enrollments.json
   def create
     @enrollment = Enrollment.new(enrollment_params)
 
@@ -37,8 +29,6 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /enrollments/1
-  # PATCH/PUT /enrollments/1.json
   def update
     respond_to do |format|
       if @enrollment.update(enrollment_params)
@@ -75,6 +65,12 @@ class EnrollmentsController < ApplicationController
       else
         student = nil
       end
-      params.require(:enrollment).permit(:course_id).merge(:student => student)
+      course_id = params.require(:enrollment)[:course]
+      if course_id
+        course = Course.find(course_id)
+      else
+        course = nil
+      end
+      params.require(:enrollment).permit().merge(:student => student, :course => course)
     end
 end

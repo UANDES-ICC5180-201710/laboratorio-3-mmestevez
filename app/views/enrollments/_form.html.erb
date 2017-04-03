@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= f.label :student_id %>
-    <%= f.select :student, options_for_select(Person.all.map{|s|[s.to_s, s.id]}) %>
+    <%= f.select :student, options_for_select(Person.all.where(is_professor: false).map{|s|[s.to_s, s.id]}) %>
   </div>
 
   <div class="field">
     <%= f.label :course_id %>
-    <%= f.text_field :course_id %>
+    <%= f.select :course, options_for_select(Course.all.map{|s|[s.to_s, s.id]}) %>
   </div>
 
   <div class="actions">

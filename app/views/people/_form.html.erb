@@ -25,7 +25,10 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-
+  <div class="field">
+    <%= f.label :is_professor %>
+    <%= f.select :is_professor, options_for_select([true, false], false) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
