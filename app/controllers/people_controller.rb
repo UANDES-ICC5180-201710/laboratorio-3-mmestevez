@@ -61,6 +61,10 @@ class PeopleController < ApplicationController
     end
   end
 
+  def professors
+    @professors = Person.where(is_professor: true)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
